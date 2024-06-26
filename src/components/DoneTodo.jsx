@@ -1,25 +1,8 @@
 import { useContext } from "react";
 import { TasksContext } from "../context/TasksContext";
 import TaskCard from "./TaskCard";
-const DoneTodo = ({ doneTodos, setTodos }) => {
+const DoneTodo = () => {
   const tasks = useContext(TasksContext);
-  const UpdateTask = (id, status) => {
-    doneTodos.map((item) => {
-      if (item.id === id) {
-        setTodos((prev) => {
-          return [
-            ...prev,
-            {
-              id: prev.length + 1,
-              title: item.title,
-              description: item.description,
-              status: status,
-            },
-          ];
-        });
-      }
-    });
-  };
   return (
     <div className="bg-slate-200 p-4 rounded-md">
       <div className="pb-3 flex items-center gap-1 h-[3.75em]">
@@ -38,7 +21,6 @@ const DoneTodo = ({ doneTodos, setTodos }) => {
                 title={item?.title}
                 description={item?.description}
                 status={item?.status}
-                UpdateTask={UpdateTask}
               />
             );
           }

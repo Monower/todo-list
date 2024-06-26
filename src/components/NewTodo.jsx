@@ -4,7 +4,7 @@ import Modal from "./Modal/Modal";
 import { TasksContext } from "../context/TasksContext";
 import { TasksDispatchContext } from "../context/TasksContext";
 const NewTodo = () => {
-  let nextId = 3;
+  let nextId = 5;
   const [todo, setTodo] = useState({
     id: nextId++,
     title: "",
@@ -89,7 +89,6 @@ const NewTodo = () => {
                   title={item?.title}
                   description={item?.description}
                   status={item?.status}
-                  // UpdateTask={UpdateTask}
                 />
               );
             }

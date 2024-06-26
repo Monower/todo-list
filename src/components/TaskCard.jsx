@@ -1,4 +1,8 @@
-const TaskCard = ({ id, title, description, status, UpdateTask }) => {
+import { useContext } from "react";
+import { TasksDispatchContext } from "../context/TasksContext";
+
+const TaskCard = ({ id, title, description, status }) => {
+  const dispatch = useContext(TasksDispatchContext);
   return (
     <div className="bg-white p-4 group rounded-md h-32">
       <div className="flex justify-between pb-1">
@@ -27,12 +31,36 @@ const TaskCard = ({ id, title, description, status, UpdateTask }) => {
             </svg>
           </summary>
           <ul className="menu dropdown-content rounded-md z-[1] w-40 p-2 drop-shadow-2xl bg-white border border-gray-500">
-            <li>
-              <button onClick={() => UpdateTask(id, 1)}>Set to Ongoing</button>
-            </li>
-            <li>
-              <button onClick={() => UpdateTask(id, 2)}>Set to Done</button>
-            </li>
+            { 
+              status == 0 ? (
+                <>
+                  <li>
+                    <button onClick={() => dispatch({ type: 'update', payload: { id: id, status: 1 } })}>Set to Ongoing</button>
+                  </li>
+                  <li>
+                    <button onClick={() => dispatch({ type: 'done', payload: { id: id, status: 2 } })}>Set to Done</button>
+                  </li>
+                </>
+              ) : status == 1 ? (
+                <>
+                  <li>
+                    <button onClick={() => dispatch({ type: 'new', payload: { id: id, status: 0 } })}>Set to New</button>
+                  </li>
+                  <li>
+                    <button onClick={() => dispatch({ type: 'done', payload: { id: id, status: 2 } })}>Set to Done</button>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <button onClick={() => dispatch({ type: 'new', payload: { id: id, status: 0 } })}>Set to New</button>
+                  </li>
+                  <li>
+                    <button onClick={() => dispatch({ type: 'update', payload: { id: id, status: 1 } })}>Set to Ongoing</button>
+                  </li>
+                </>
+              )
+            }
           </ul>
         </details>
       </div>
