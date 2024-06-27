@@ -1,16 +1,15 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { TasksDispatchContext } from "../context/TasksContext";
-import EditTaskModal from "./Modal/EditTaskModal";
 const TaskCard = ({ id, title, description, status, due_date }) => {
   const dispatch = useContext(TasksDispatchContext);
   let due;
   const today = new Date().toISOString().split('T')[0];
   if(due_date.split('-').join('') === today.split('-').join('')){
-    due = 'yellow-500';
+    due = '#eab308';
   }else if (new Date(due_date) < new Date()) {
-    due = "red-500";
+    due = "#ef4444";
   }else{
-    due = "green-500";
+    due = "#22c55e";
   }
 
 
@@ -32,7 +31,8 @@ const TaskCard = ({ id, title, description, status, due_date }) => {
           </span>
           <span title={`Due Date: ${due_date}`}>
             <svg
-              className={`w-4 h-4 cursor-pointer fill-${due}`}
+              className={`w-4 h-4 cursor-pointer`}
+              fill={due}
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 512 512"
             >

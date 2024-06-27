@@ -13,12 +13,16 @@ const NewTodo = () => {
   });
 
   const AddNewTask = () => {
-    setTodo({
-      title: "",
-      description: "",
-      due_date: ""
-    });
-    dispatch({ type: "create", payload: todo });
+    if (todo.title.length == 0 || todo.due_date.length == 0 || todo.description.length == 0) {
+      alert("Please enter all the fields");
+    } else { 
+      setTodo({
+        title: "",
+        description: "",
+        due_date: ""
+      });
+      dispatch({ type: "create", payload: todo });
+    }
   };
 
   const newtask = tasks
